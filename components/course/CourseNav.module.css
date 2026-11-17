@@ -1,0 +1,254 @@
+.layer {
+  --sw: min(100cqw, 100cqh * 1.155556);
+  --sh: calc(var(--sw) * 0.865385);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transition: opacity 220ms var(--ease-out);
+}
+
+.layer[data-hidden] {
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 180ms var(--ease-out),
+    visibility 0s 180ms;
+}
+
+/* Landscape: broadcast tags beside each green. */
+.item {
+  position: absolute;
+  left: calc(50cqw + (var(--x) - 0.5) * var(--sw));
+  top: calc(50cqh + (var(--y) - 0.5) * var(--sh));
+  transform: translateY(-50%);
+}
+
+.tag {
+  display: flex;
+  align-items: stretch;
+  text-decoration: none;
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  box-shadow: 0 10px 20px -10px rgb(0 0 0 / 0.6);
+  pointer-events: auto;
+}
+
+.num {
+  display: grid;
+  place-items: center;
+  min-width: 34px;
+  padding: 7px 10px;
+  background: var(--paper);
+  color: var(--ink);
+  font-weight: 800;
+  transition: background-color 160ms var(--ease-out);
+}
+
+.tag[data-active] .num {
+  background: var(--tracer);
+  color: var(--tracer-ink);
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  padding: 7px 12px;
+  background: var(--panel);
+  transition: background-color 160ms var(--ease-out);
+}
+
+.tag:hover .title {
+  background: var(--panel-solid);
+}
+
+.suffix {
+  color: var(--label);
+}
+
+.meta,
+.go {
+  display: none;
+}
+
+.hint {
+  position: absolute;
+  right: 40px;
+  bottom: 28px;
+  font-size: 15px;
+  color: var(--soft);
+  pointer-events: none;
+}
+
+.hintTouch {
+  display: none;
+}
+
+@media (hover: none), (max-width: 899px) {
+  .hintPointer {
+    display: none;
+  }
+  .hintTouch {
+    display: inline;
+  }
+}
+
+/* The hover card sits in open rough at the top left of the course. */
+.preview {
+  position: absolute;
+  left: calc(50cqw - var(--sw) / 2 + 0.115 * var(--sw));
+  top: calc(50cqh - var(--sh) / 2 + 0.044 * var(--sh));
+  width: 300px;
+  background: var(--paper);
+  color: var(--ink-body);
+  box-shadow: var(--shadow-panel);
+  pointer-events: auto;
+}
+
+.previewHead {
+  background: var(--tracer);
+  color: var(--tracer-ink);
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 22px;
+  line-height: 1.05;
+  text-transform: uppercase;
+  padding: 10px 14px 9px;
+}
+
+.previewBody {
+  padding: 12px 14px 6px;
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.previewMeta {
+  padding: 0 14px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--ink-muted);
+}
+
+.preview button {
+  display: flex;
+  width: calc(100% - 28px);
+  margin: 12px 14px 14px;
+}
+
+.badges {
+  display: none;
+}
+
+/* Portrait: the course turns, holes become a list below it. */
+@container map (aspect-ratio < 4 / 5) {
+  .layer {
+    --sw: min(100cqh - var(--list-h), 100cqw * 1.155556);
+  }
+
+  .preview {
+    display: none;
+  }
+
+  .badges {
+    display: block;
+    position: absolute;
+    inset: 0;
+  }
+
+  .badge {
+    position: absolute;
+    left: calc(50cqw + (var(--by) - 0.5) * var(--sh));
+    top: calc((100cqh - var(--list-h)) / 2 - (var(--bx) - 0.5) * var(--sw));
+    transform: translate(-50%, -50%);
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-cond);
+    font-weight: 800;
+    font-size: 16px;
+    box-shadow: 0 8px 16px -8px rgb(0 0 0 / 0.6);
+  }
+
+  .badge[data-active] {
+    background: var(--tracer);
+    color: var(--tracer-ink);
+  }
+
+  .nav {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: var(--list-h);
+    padding: 8px 12px 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .hint {
+    position: static;
+    font-size: 13px;
+    margin-bottom: 6px;
+  }
+
+  .list {
+    display: grid;
+    gap: 4px;
+  }
+
+  .item {
+    position: static;
+    transform: none;
+  }
+
+  .tag {
+    font-size: 17px;
+    min-height: 50px;
+    box-shadow: none;
+  }
+
+  .num {
+    min-width: 48px;
+  }
+
+  .title {
+    flex: 1;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 4px;
+    padding: 6px 12px;
+  }
+
+  .name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+
+  .meta {
+    display: block;
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 1.2;
+    text-transform: none;
+    color: var(--soft);
+  }
+
+  .go {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    background: var(--panel);
+    color: var(--tracer);
+  }
+}
