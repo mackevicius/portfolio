@@ -142,6 +142,12 @@
   display: none;
 }
 
+@media (max-width: 899px) {
+  .preview {
+    display: none;
+  }
+}
+
 /* Portrait: the course turns, holes become a list below it. */
 @container map (aspect-ratio < 4 / 5) {
   .layer {

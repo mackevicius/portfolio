@@ -289,6 +289,7 @@ Graphics hug the frame edges the way a TV package does: the scorebug 28px from t
 **Responsive behaviour:**
 
 - **Portrait map** (container `aspect-ratio < 4/5`): the course rotates a quarter turn, flags counter-rotate to stay upright, the hover card is hidden, small numbered badges mark each hole on the map, and the holes become a full-width list below it (50px rows with number, name, one fact and an arrow cell). The 3D camera reads the same container flag so both views agree.
+- **Below 900px**: hide the home-view hover card in both orientations so it cannot cover the map. Hole tags or the portrait list remain available to open each hole.
 - **Below 900px**: the layout stacks. The player card collapses to a 72px head-crop of the portrait beside the name and info, with extra rows hidden and labels visually hidden; the hole view puts the scorebug, lower third and screen card in one column under a shorter map. Idle scorebug tabs shrink to their number.
 - **Hole container below 940px**: the lower third and screen card stretch to the frame with 24px inset.
 
