@@ -1,0 +1,268 @@
+.layer {
+  grid-column: 2;
+  grid-row: 2;
+  position: relative;
+  z-index: 1;
+  container: hole / size;
+  pointer-events: none;
+}
+
+.scorebug {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  display: flex;
+  max-width: calc(100% - 40px);
+  overflow-x: auto;
+  scrollbar-width: none;
+  box-shadow: 0 10px 20px -10px rgb(0 0 0 / 0.6);
+  pointer-events: auto;
+  animation: drop 420ms var(--ease-out) both;
+}
+
+.tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 0;
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color 160ms var(--ease-out),
+    color 160ms var(--ease-out);
+}
+
+.tab {
+  background: var(--panel);
+  color: var(--soft);
+  border-left: 1px solid var(--panel-line);
+}
+
+.tab:hover {
+  color: var(--paper);
+  background: var(--panel-solid);
+}
+
+.tab[aria-current] {
+  background: var(--tracer);
+  color: var(--tracer-ink);
+  cursor: default;
+}
+
+.tab:focus-visible {
+  outline-offset: -3px;
+}
+
+.tab[aria-current]:focus-visible {
+  outline-color: var(--ink);
+}
+
+.tabNum::after {
+  content: ' ·';
+}
+
+.skip {
+  position: absolute;
+  right: 40px;
+  bottom: 28px;
+  pointer-events: auto;
+}
+
+.panels {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.panels > * {
+  pointer-events: auto;
+}
+
+.lowerThird {
+  position: absolute;
+  left: 0;
+  bottom: 40px;
+  width: min(560px, 100cqw - 500px);
+  box-shadow: var(--shadow-panel);
+  animation: wipe 640ms var(--ease-out) both;
+}
+
+.ltTop {
+  display: flex;
+  align-items: stretch;
+}
+
+.ltHole {
+  display: grid;
+  place-items: center;
+  padding: 0 18px;
+  background: var(--tracer);
+  color: var(--tracer-ink);
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 22px;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.ltName {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 22px 6px;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 40px;
+  line-height: 1.05;
+  text-transform: uppercase;
+  outline: none;
+}
+
+.ltBottom {
+  display: grid;
+  gap: 14px;
+  padding: 14px 22px 18px;
+  background: var(--panel);
+}
+
+.summary {
+  font-size: 16px;
+  line-height: 1.45;
+  max-width: 54ch;
+  text-wrap: pretty;
+}
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 28px;
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+.facts dt {
+  margin-bottom: 2px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+@keyframes wipe {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes drop {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@container hole (max-width: 939px) {
+  .lowerThird {
+    right: 24px;
+    width: auto;
+  }
+}
+
+@media (max-width: 1199px) {
+  .layer {
+    grid-column: 1;
+    grid-row: 4;
+    position: relative;
+    container: none;
+    pointer-events: auto;
+    padding: 0 12px 32px;
+  }
+
+  .scorebug {
+    position: relative;
+    top: auto;
+    max-width: none;
+    margin: -22px -12px 12px;
+    box-shadow: none;
+  }
+
+  .tab {
+    flex: none;
+    justify-content: center;
+    min-width: 44px;
+    padding: 0 12px;
+  }
+
+  .tab:not([aria-current]) .tabName {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+
+  .tab:not([aria-current]) .tabNum::after {
+    content: none;
+  }
+
+  .tab[aria-current] {
+    flex: 1;
+    justify-content: flex-start;
+  }
+
+  .skip {
+    position: fixed;
+    right: 12px;
+    bottom: 12px;
+  }
+
+  .panels {
+    position: static;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .lowerThird {
+    position: static;
+    width: auto;
+  }
+
+  .ltHole {
+    font-size: 18px;
+    padding: 0 12px;
+  }
+
+  .ltName {
+    font-size: 30px;
+    padding: 8px 14px 6px;
+  }
+
+  .ltBottom {
+    padding: 12px 14px 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scorebug,
+  .lowerThird {
+    animation: none;
+  }
+}

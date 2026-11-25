@@ -1,0 +1,66 @@
+/* Broadcast buttons: square, condensed caps. Tracer yellow is the only loud colour. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 0;
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color 160ms var(--ease-out),
+    color 160ms var(--ease-out);
+}
+
+.primary {
+  composes: btn;
+  background: var(--tracer);
+  color: var(--tracer-ink);
+}
+.primary:hover {
+  background: #ffe24d;
+}
+.primary:focus-visible {
+  outline-color: var(--paper);
+}
+
+.dark {
+  composes: btn;
+  background: var(--panel);
+  color: var(--paper);
+}
+.dark:hover {
+  background: var(--tracer);
+  color: var(--tracer-ink);
+}
+
+/* Solid action on white surfaces. */
+.ink {
+  composes: btn;
+  background: var(--ink);
+  color: var(--paper);
+}
+.ink:hover {
+  background: #0a2c19;
+  color: var(--tracer);
+}
+.ink:focus-visible {
+  outline-color: var(--ink);
+}
+
+.label {
+  font-family: var(--font-cond);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--label);
+}
