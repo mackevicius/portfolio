@@ -126,7 +126,7 @@
   container: map / size;
 }
 
-.round[data-phase='course'] .map {
+.round[data-phase='course'] {
   --list-h: 258px;
 }
 
@@ -250,6 +250,15 @@
 }
 
 @media (max-width: 599px) {
+  .round[data-phase='course'] {
+    grid-template-rows: auto auto auto;
+    height: auto;
+  }
+
+  .round[data-phase='course'] .region {
+    height: calc(var(--list-h) + 115.56vw);
+  }
+
   .back {
     justify-content: center;
     gap: 0;
